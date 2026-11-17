@@ -24,6 +24,9 @@ jobs:
           gradle-version: '9.9.1'
 
       - name: Build patch bundle
+        env:
+          GITHUB_ACTOR: ${{ github.actor }}
+          GITHUB_TOKEN: ${{ secrets.GH_PACKAGES_TOKEN }}
         run: |
           gradle generateSigningKey buildAndroid --console=plain
           ls -la patches/build/libs/
