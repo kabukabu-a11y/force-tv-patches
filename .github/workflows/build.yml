@@ -39,10 +39,10 @@ jobs:
       - name: Prepare release assets
         run: |
           MPP=$(ls patches/build/libs/*.mpp | head -1)
-          cp "$MPP" zangetsu-tv-patches.mpp
+          cp "$MPP" force-tv-patches.mpp
           SIG=$(ls patches/build/libs/*.sig 2>/dev/null | head -1 || true)
-          if [ -n "$SIG" ]; then cp "$SIG" zangetsu-tv-patches.mpp.sig; fi
-          ls -la zangetsu-tv-patches.mpp*
+          if [ -n "$SIG" ]; then cp "$SIG" force-tv-patches.mpp.sig; fi
+          ls -la force-tv-patches.mpp*
 
       - name: Publish rolling latest release
         env:
@@ -53,8 +53,8 @@ jobs:
                                 if ! gh release view latest >/dev/null 2>&1; then break; fi
                                             sleep 2
                                                       done
-                                                      ASSETS="zangetsu-tv-patches.mpp"
-          if [ -f zangetsu-tv-patches.mpp.sig ]; then ASSETS="$ASSETS zangetsu-tv-patches.mpp.sig"; fi
+                                                      ASSETS="force-tv-patches.mpp"
+          if [ -f force-tv-patches.mpp.sig ]; then ASSETS="$ASSETS force-tv-patches.mpp.sig"; fi
           gh release create latest \
             --title "Force TV patches (latest build)" \
             --notes "Automated build from the main branch. The .mpp asset is the Morphe patch bundle; the .sig asset is its signature." \
