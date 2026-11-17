@@ -1,4 +1,4 @@
-rootProject.name = "zangetsu-tv-patches"
+rootProject.name = "force-tv-patches"
 
 pluginManagement {
     repositories {
