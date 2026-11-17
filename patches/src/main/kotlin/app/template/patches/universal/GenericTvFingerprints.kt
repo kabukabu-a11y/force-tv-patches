@@ -28,6 +28,28 @@ object LeanbackFeatureCheckFingerprint : Fingerprint(
 )
 
 /**
+ * Call sites of PackageManager.hasSystemFeature() with a leanback
+ * feature string, in a method of any return type — including static
+ * initializers and object init blocks, where many apps compute their
+ * "is TV" flag exactly once (for example VLC's AndroidDevices object).
+ * The boolean-method fingerprint above cannot see those, because
+ * initializers do not return a boolean.
+ */
+object LeanbackCallSiteFingerprint : Fingerprint(
+    filters = listOf(
+        anyInstruction(
+            string("android.software.leanback"),
+            string("android.software.leanback_only"),
+            string("android.hardware.type.television")
+        ),
+        methodCall(
+            definingClass = "Landroid/content/pm/PackageManager;",
+            name = "hasSystemFeature"
+        )
+    )
+)
+
+/**
  * Generic TV detection based on UiModeManager.
  *
  * The other platform-sanctioned way to detect a TV is comparing
