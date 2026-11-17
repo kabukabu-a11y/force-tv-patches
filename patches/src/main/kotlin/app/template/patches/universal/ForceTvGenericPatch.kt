@@ -24,7 +24,7 @@ import app.morphe.patcher.patch.patch
 val forceTvLeanbackPatch = patch(
     name = "Force TV mode (leanback check)",
     description = "Universal: makes any app that detects TVs via the leanback system features treat the device as an Android TV. Experimental heuristic.",
-    default = true
+    default = false
 ) {
     execute {
         val matches = LeanbackFeatureCheckFingerprint.matchAllOrNull()
@@ -57,7 +57,7 @@ val forceTvLeanbackPatch = patch(
 val forceTvUiModePatch = patch(
     name = "Force TV mode (UiModeManager check)",
     description = "Universal: makes any app that detects TVs via UiModeManager treat the device as an Android TV. Experimental heuristic.",
-    default = true
+    default = false
 ) {
     execute {
         val matches = UiModeTvCheckFingerprint.matchAllOrNull()
