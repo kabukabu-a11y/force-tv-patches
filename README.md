@@ -29,14 +29,15 @@ This can only unlock a TV interface that **already exists inside the same APK** 
 | Patch | Target | Default | What it does |
 |---|---|---|---|
 | Force TV mode for Zangetsu | Zangetsu (any version; verified on 2.3.6) | On | Precise patch for Zangetsu: flips both of its TV checks — the `isTv` device channel used by the Dart UI, and `Globals.isAutoTv` in the built-in CloudStream plugin host. |
-| Force TV mode (leanback check) | Universal | On | Makes every boolean method that references a leanback feature string return true. Experimental heuristic. |
-| Force TV mode (UiModeManager check) | Universal | On | Makes every boolean method that queries `UiModeManager.getCurrentModeType()` return true. Experimental heuristic. |
+| Force TV mode (leanback check) | Universal | **Off** | Makes every boolean method that references a leanback feature string return true. Experimental heuristic. |
+| Force TV mode (UiModeManager check) | Universal | **Off** | Makes every boolean method that queries `UiModeManager.getCurrentModeType()` return true. Experimental heuristic. |
 | Rename app (add TV suffix) | Universal | **Off** | Appends " TV" to the app name: "Zangetsu" → "Zangetsu TV". |
 | Rename app (add (TV) suffix) | Universal | **Off** | Appends " (TV)" to the app name: "Zangetsu" → "Zangetsu (TV)". |
 
 Notes on the universal patches:
 
 - They fail with a clear message when the app contains no matching detection code, instead of silently doing nothing.
+- Morphe requires universal patches to be declared off by default, so enable them per app when patching.
 - The heuristic can, in principle, catch a boolean method that mixes the TV check into a larger decision. If an app misbehaves after patching, turn the universal patches off for that app first.
 - The rename patches edit the label string resource (or a literal manifest label). Per-locale labels, if an app defines them, keep the original name.
 
