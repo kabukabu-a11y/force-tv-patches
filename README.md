@@ -56,8 +56,8 @@ Combine the two sources: apply **Clone app** (from the official Morphe Patches s
 
 ## Compatibility
 
-- ✅ **Verified:** Zangetsu 2.3.6 (TV interface confirmed working on a phone), CloudStream (universal patch, reported working 2026-11-17).
-- 🟡 **Good candidates:** apps whose TV interface ships in the same APK and is gated by the standard checks. VLC: its leanback check runs inside an initializer (`AndroidDevices`), which the leanback patch covers from v1.1.3 — retest pending (VLC also has its own "Android TV interface" setting). Plex (one package serves phones and TVs) is untested. Reports welcome.
+- ✅ **Verified:** Zangetsu 2.3.6 (TV interface confirmed working on a phone), CloudStream (universal patch, reported working 2026-11-17), VLC 3.7.2 from Google Play (leanback patch; its check runs inside an initializer, covered since v1.1.3; confirmed 2026-11-17 — VLC also has its own "Android TV interface" setting).
+- 🟡 **Good candidates (untested):** apps whose TV interface ships in the same APK and is gated by the standard checks, e.g. Plex (one package serves phones and TVs). Reports welcome.
 - ❌ **Not expected to work:** YouTube and other Google apps (the TV experience is not gated by device detection alone; integrity checks and separate TV builds are involved), Netflix / Disney+ / Prime Video (separate TV APKs, DRM and integrity checks — there is no hidden TV interface in the phone APK to unlock), Spotify (no leanback interface in the phone app), and in general any app whose TV interface is delivered as a separate app or split. Kodi needs no patch: it is TV-native already.
 
 Rule of thumb: if installing the app's regular APK on a real Android TV shows a TV interface, this patch has something to unlock. If the store instead serves a different "for Android TV" app, it does not.
@@ -131,8 +131,8 @@ Morphe 公式パッチには、パッチ済みアプリのパッケージ名を�
 
 ## 対応状況
 
-- ✅ **動作確認済み：** Zangetsu 2.3.6（スマホ実機で TV UI の動作を確認）、CloudStream（ユニバーサルパッチ、2026-11-17に動作報告）。
-- 🟡 **効く可能性が高い候補：** VLC は leanback 判定が初期化子（AndroidDevices）の中で動く形で、leanback パッチが v1.1.3 からこの形にも対応（再検証待ち。なお VLC 自身にも「Android TV interface」設定がある）。Plex（スマホと TV で同一パッケージ）は未検証。動作報告歓迎です。
+- ✅ **動作確認済み：** Zangetsu 2.3.6（スマホ実機で TV UI の動作を確認）、CloudStream（ユニバーサルパッチ、2026-11-17に動作報告）、VLC 3.7.2（Google Play 版、leanback パッチ。判定が初期化子の中で動く形で v1.1.3 から対応、2026-11-17に確認。なお VLC 自身にも「Android TV interface」設定がある）。
+- 🟡 **効く可能性が高い候補（未検証）：** TV 用画面が同じ APK に入っていて、標準的な判定で切り替えているアプリ。例：Plex（スマホと TV で同一パッケージ）。動作報告歓迎です。
 - ❌ **効かない見込み：** YouTube などの Google 系アプリ（TV 体験は端末判定だけで制御されておらず、整合性チェックや TV 専用ビルドが絡む）、Netflix / Disney+ / Prime Video（TV 専用 APK が別にあり、DRM や整合性チェックもあるため、スマホ版の中に引き出せる TV 画面が存在しない）、Spotify（スマホ版に leanback 画面が無い）、その他 TV 用画面が別アプリや分割 APK で配られるもの全般。Kodi は元々 TV ネイティブなのでパッチ自体が不要です。
 
 目安として「本物の Android TV にそのアプリの通常 APK を入れると TV 画面になる」なら引き出す対象があります。「Android TV 用」と銘打った別アプリが配信されている場合は対象がありません。
