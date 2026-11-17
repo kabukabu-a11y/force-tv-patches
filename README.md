@@ -31,8 +31,8 @@ This can only unlock a TV interface that **already exists inside the same APK** 
 | Force TV mode for Zangetsu | Zangetsu (any version; verified on 2.3.6) | On | Precise patch for Zangetsu: flips both of its TV checks — the `isTv` device channel used by the Dart UI, and `Globals.isAutoTv` in the built-in CloudStream plugin host. |
 | Force TV mode (leanback check) | Universal | **Off** | Makes every boolean method that references a leanback feature string return true. Experimental heuristic. |
 | Force TV mode (UiModeManager check) | Universal | **Off** | Makes every boolean method that queries `UiModeManager.getCurrentModeType()` return true. Experimental heuristic. |
-| Rename app (add TV suffix) | Universal | **Off** | Appends " TV" to the app name: "Zangetsu" → "Zangetsu TV". |
-| Rename app (add (TV) suffix) | Universal | **Off** | Appends " (TV)" to the app name: "Zangetsu" → "Zangetsu (TV)". |
+| Rename app (add TV suffix) | Universal | **Off** | Appends " TV" to the app name: "Zangetsu" → "Zangetsu TV". Experimental — often has no effect. |
+| Rename app (add (TV) suffix) | Universal | **Off** | Appends " (TV)" to the app name: "Zangetsu" → "Zangetsu (TV)". Experimental — often has no effect. |
 
 Notes on the universal patches:
 
@@ -56,7 +56,7 @@ Combine the two sources: apply **Clone app** (from the official Morphe Patches s
 
 ## Compatibility
 
-- ✅ **Verified:** Zangetsu 2.3.6 (TV interface confirmed working on a phone), CloudStream (universal patch, reported working 2026-11-17), VLC 3.7.2 from Google Play (leanback patch; its check runs inside an initializer, covered since v1.1.3; confirmed 2026-11-17 — VLC also has its own "Android TV interface" setting).
+- ✅ **Verified:** Zangetsu 2.3.6 (TV interface confirmed working on a phone), CloudStream (universal patch, reported working 2026-11-17), VLC 3.7.2 from Google Play (leanback patch; its check runs inside an initializer, covered since v1.1.3; confirmed 2026-11-17 — VLC also has its own "Android TV interface" setting), File Manager + by Alpha Inventor (universal patch, confirmed 2026-11-17).
 - 🟡 **Good candidates (untested):** apps whose TV interface ships in the same APK and is gated by the standard checks, e.g. Plex (one package serves phones and TVs). Reports welcome.
 - ❌ **Not expected to work:** YouTube and other Google apps (the TV experience is not gated by device detection alone; integrity checks and separate TV builds are involved), Netflix / Disney+ / Prime Video (separate TV APKs, DRM and integrity checks — there is no hidden TV interface in the phone APK to unlock), Spotify (no leanback interface in the phone app), and in general any app whose TV interface is delivered as a separate app or split. Kodi needs no patch: it is TV-native already.
 
@@ -66,7 +66,8 @@ Rule of thumb: if installing the app's regular APK on a real Android TV shows a 
 
 - Patched apps cannot be updated through the Play Store; re-patch new versions yourself (the fingerprints are designed to survive updates, but a rewritten detection can always break them).
 - A patched app may still refuse to run for unrelated reasons (signature or integrity checks). That is outside what a detection patch can fix.
-- Use at your own risk. This project is not affiliated with Morphe, with the Zangetsu developers, or with any app mentioned above.
+- The rename patches are experimental and often have no effect: they only work when an app takes its launcher name from its manifest label resources, and many apps set their displayed name elsewhere.
+- **Purpose and disclaimer.** These patches were developed for the author's personal use: running apps on a phone with a remote control, as a lightweight Android TV substitute. They are shared as-is, without warranty of any kind. Use at your own risk — the author accepts no responsibility for any damage or loss resulting from their use. This project is not affiliated with Morphe, with the Zangetsu developers, or with any app mentioned above.
 
 ## Building
 
@@ -107,8 +108,8 @@ Android が用意している TV 判定の方法は主に2つで、多くのア�
 | Force TV mode for Zangetsu | Zangetsu（全バージョン、検証は 2.3.6） | オン | Zangetsu 専用の精密パッチ。Dart UI が使う `isTv` デバイスチャネルと、内蔵 CloudStream プラグインホストの `Globals.isAutoTv` の両方を書き換えます。 |
 | Force TV mode (leanback check) | ユニバーサル | オン | leanback フィーチャー文字列を参照する boolean メソッドをすべて true 固定にします。実験的なヒューリスティクスです。 |
 | Force TV mode (UiModeManager check) | ユニバーサル | オン | `UiModeManager.getCurrentModeType()` を呼ぶ boolean メソッドをすべて true 固定にします。実験的なヒューリスティクスです。 |
-| Rename app (add TV suffix) | ユニバーサル | **オフ** | アプリ名の末尾に「 TV」を付けます（例：Zangetsu → Zangetsu TV）。 |
-| Rename app (add (TV) suffix) | ユニバーサル | **オフ** | アプリ名の末尾に「 (TV)」を付けます（例：Zangetsu → Zangetsu (TV)）。 |
+| Rename app (add TV suffix) | ユニバーサル | **オフ** | アプリ名の末尾に「 TV」を付けます（例：Zangetsu → Zangetsu TV）。実験的：効かないことも多いです。 |
+| Rename app (add (TV) suffix) | ユニバーサル | **オフ** | アプリ名の末尾に「 (TV)」を付けます（例：Zangetsu → Zangetsu (TV)）。実験的：効かないことも多いです。 |
 
 ユニバーサルパッチの注意：
 
@@ -131,7 +132,7 @@ Morphe 公式パッチには、パッチ済みアプリのパッケージ名を�
 
 ## 対応状況
 
-- ✅ **動作確認済み：** Zangetsu 2.3.6（スマホ実機で TV UI の動作を確認）、CloudStream（ユニバーサルパッチ、2026-11-17に動作報告）、VLC 3.7.2（Google Play 版、leanback パッチ。判定が初期化子の中で動く形で v1.1.3 から対応、2026-11-17に確認。なお VLC 自身にも「Android TV interface」設定がある）。
+- ✅ **動作確認済み：** Zangetsu 2.3.6（スマホ実機で TV UI の動作を確認）、CloudStream（ユニバーサルパッチ、2026-11-17に動作報告）、VLC 3.7.2（Google Play 版、leanback パッチ。判定が初期化子の中で動く形で v1.1.3 から対応、2026-11-17に確認。なお VLC 自身にも「Android TV interface」設定がある）、ファイルマネージャー＋（Alpha Inventor、ユニバーサルパッチ、2026-11-17に確認）。
 - 🟡 **効く可能性が高い候補（未検証）：** TV 用画面が同じ APK に入っていて、標準的な判定で切り替えているアプリ。例：Plex（スマホと TV で同一パッケージ）。動作報告歓迎です。
 - ❌ **効かない見込み：** YouTube などの Google 系アプリ（TV 体験は端末判定だけで制御されておらず、整合性チェックや TV 専用ビルドが絡む）、Netflix / Disney+ / Prime Video（TV 専用 APK が別にあり、DRM や整合性チェックもあるため、スマホ版の中に引き出せる TV 画面が存在しない）、Spotify（スマホ版に leanback 画面が無い）、その他 TV 用画面が別アプリや分割 APK で配られるもの全般。Kodi は元々 TV ネイティブなのでパッチ自体が不要です。
 
@@ -141,7 +142,8 @@ Morphe 公式パッチには、パッチ済みアプリのパッケージ名を�
 
 - パッチ済みアプリは Play ストア経由で更新できません。新バージョンは自分でパッチし直してください（フィンガープリントは更新に耐える設計ですが、判定コードが書き換われば外れます）。
 - 署名・整合性チェックなどでアプリ自体が起動を拒む場合は、このパッチの範囲外です。
-- 利用は自己責任で。本プロジェクトは Morphe、Zangetsu の開発者、および上記の各アプリとは無関係です。
+- アプリ名変更パッチは実験的なもので、効かないことも多いです。ランチャーの表示名がマニフェストのラベルリソース由来のアプリにしか効きません。
+- **目的と免責：** このパッチ集は、スマホをリモコンで操作して Android TV の代わりに使うという、作者の個人的な目的で開発したものです。現状のまま公開しており、動作の保証はなく、使用によって生じた損害についても責任を負いかねます。利用は自己責任でお願いします。本プロジェクトは Morphe、Zangetsu の開発者、および上記の各アプリとは無関係です。
 
 ## ビルド
 
