@@ -8,7 +8,11 @@ on:
 permissions:
   contents: write
 
-jobs:
+concurrency:
+  group: build-patches
+    cancel-in-progress: false
+    
+    jobs:
   build:
     runs-on: ubuntu-latest
     steps:
@@ -45,7 +49,11 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           gh release delete latest --yes --cleanup-tag || true
-          ASSETS="zangetsu-tv-patches.mpp"
+                    for i in $(seq 1 15); do
+                                if ! gh release view latest >/dev/null 2>&1; then break; fi
+                                            sleep 2
+                                                      done
+                                                      ASSETS="zangetsu-tv-patches.mpp"
           if [ -f zangetsu-tv-patches.mpp.sig ]; then ASSETS="$ASSETS zangetsu-tv-patches.mpp.sig"; fi
           gh release create latest \
             --title "Force TV patches (latest build)" \
