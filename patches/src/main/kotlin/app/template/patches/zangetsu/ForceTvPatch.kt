@@ -57,8 +57,10 @@ val forceTvPatch = patch(
         val anchorIndex = IsTvChannelFingerprint.instructionMatches[1].index
         val window = (anchorIndex + 1)..(anchorIndex + 12)
         val constIndex = window.first { index ->
-            val instruction = method.getInstruction<NarrowLiteralInstruction>(index)
-            instruction.opcode == Opcode.CONST_4 && instruction.narrowLiteral == 0
+            val instruction = method.getInstruction(index)
+            instruction is NarrowLiteralInstruction &&
+                instruction.opcode == Opcode.CONST_4 &&
+                instruction.narrowLiteral == 0
         }
         val register = method.getInstruction<OneRegisterInstruction>(constIndex).registerA
         method.replaceInstruction(constIndex, "const/4 v$register, 0x1")
