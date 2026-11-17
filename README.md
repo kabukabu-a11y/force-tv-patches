@@ -2,13 +2,13 @@
 
 Morphe patches that make apps believe they are running on an Android TV, so a phone build that secretly contains a TV interface will actually use it — on any device, with no root and no bootloader unlock.
 
-**[➕ Add to Morphe](https://morphe.software/add-source?github=kabukabu-a11y/zangetsu-tv-patches&name=Force+TV+Patches)** — open this link on the Android device where Morphe Manager is installed, and the source is handed to Morphe directly.
+**[➕ Add to Morphe](https://morphe.software/add-source?github=kabukabu-a11y/force-tv-patches&name=Force+TV+Patches)** — open this link on the Android device where Morphe Manager is installed, and the source is handed to Morphe directly.
 
 Or add the source manually in Morphe Manager (Sources → + → Remote), using any of these:
 
 ```
-github.com/kabukabu-a11y/zangetsu-tv-patches
-https://raw.githubusercontent.com/kabukabu-a11y/zangetsu-tv-patches/main/patches-bundle.json
+github.com/kabukabu-a11y/force-tv-patches
+https://raw.githubusercontent.com/kabukabu-a11y/force-tv-patches/main/patches-bundle.json
 ```
 
 日本語の説明は下半分にあります。
@@ -71,7 +71,7 @@ Rule of thumb: if installing the app's regular APK on a real Android TV shows a 
 
 ## Building
 
-GitHub Actions builds the bundle on every push to `main` (`gradle generateSigningKey buildAndroid`) and publishes the `.mpp` to the rolling [`latest` release](https://github.com/kabukabu-a11y/zangetsu-tv-patches/releases/latest). The signing key is generated per build, so Morphe Manager may ask you to re-trust the source after an update. Local builds use the same command (JDK 21, Gradle 9.9.1).
+GitHub Actions builds the bundle on every push to `main` (`gradle buildAndroid`) and publishes the `.mpp` to the rolling [`latest` release](https://github.com/kabukabu-a11y/force-tv-patches/releases/latest). Releases are signed with a persistent key (the `MORPHE_SIGNING_KEY` Actions secret; the public key is `morphe-signing.pub` in this repository and in the bundle metadata), so updates keep the same signer and install in place.
 
 License: GPLv3.
 
@@ -81,13 +81,13 @@ License: GPLv3.
 
 アプリに「この端末は Android TV だ」と思わせる Morphe パッチ集です。スマホ向けビルドの中に TV 用インターフェースが隠れているアプリなら、それをどの端末でも引き出せます。root もブートローダー解除も不要です。
 
-**[➕ Morphe に追加](https://morphe.software/add-source?github=kabukabu-a11y/zangetsu-tv-patches&name=Force+TV+Patches)** — Morphe Manager を入れた Android 端末でこのリンクを開くと、ソースがそのまま Morphe に渡ります。
+**[➕ Morphe に追加](https://morphe.software/add-source?github=kabukabu-a11y/force-tv-patches&name=Force+TV+Patches)** — Morphe Manager を入れた Android 端末でこのリンクを開くと、ソースがそのまま Morphe に渡ります。
 
 手動で追加する場合は、Morphe Manager の「ソース → + → リモート」に次のどちらかを貼ってください。
 
 ```
-github.com/kabukabu-a11y/zangetsu-tv-patches
-https://raw.githubusercontent.com/kabukabu-a11y/zangetsu-tv-patches/main/patches-bundle.json
+github.com/kabukabu-a11y/force-tv-patches
+https://raw.githubusercontent.com/kabukabu-a11y/force-tv-patches/main/patches-bundle.json
 ```
 
 ## 仕組み
@@ -147,6 +147,6 @@ Morphe 公式パッチには、パッチ済みアプリのパッケージ名を�
 
 ## ビルド
 
-GitHub Actions が `main` への push のたびに `gradle generateSigningKey buildAndroid` を実行し、`.mpp` を [`latest` リリース](https://github.com/kabukabu-a11y/zangetsu-tv-patches/releases/latest)へ公開します。署名鍵はビルドごとに生成し直すため、更新時に Manager 側でソースの信頼確認が出ることがあります。ローカルビルドも同じコマンドです（JDK 21 + Gradle 9.9.1）。
+GitHub Actions が `main` への push のたびに `gradle buildAndroid` を実行し、`.mpp` を [`latest` リリース](https://github.com/kabukabu-a11y/force-tv-patches/releases/latest)へ公開します。署名は固定鍵（Actions シークレット `MORPHE_SIGNING_KEY`、公開鍵はリポジトリ内の `morphe-signing.pub` とバンドル情報に掲載）で行うため、更新しても署名者は変わらず、そのまま上書き更新できます。
 
 ライセンス：GPLv3
