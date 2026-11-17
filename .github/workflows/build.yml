@@ -27,8 +27,9 @@ jobs:
         env:
           GITHUB_ACTOR: ${{ github.actor }}
           GITHUB_TOKEN: ${{ secrets.GH_PACKAGES_TOKEN }}
+          MORPHE_SIGNING_KEY: ${{ secrets.MORPHE_SIGNING_KEY }}
         run: |
-          gradle generateSigningKey buildAndroid --console=plain
+          gradle buildAndroid --console=plain
           ls -la patches/build/libs/
 
       - name: Prepare release assets
