@@ -5,10 +5,10 @@ patches {
     about {
         name = "Force TV Patches"
         description = "Morphe patches that make apps treat any device as an Android TV"
-        source = "https://github.com/kabukabu-a11y/zangetsu-tv-patches"
+        source = "https://github.com/kabukabu-a11y/force-tv-patches"
         author = "kabukabu"
         contact = "na"
-        website = "https://github.com/kabukabu-a11y/zangetsu-tv-patches"
+        website = "https://github.com/kabukabu-a11y/force-tv-patches"
         license = "GPLv3"
     }
 }
